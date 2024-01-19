@@ -14,9 +14,14 @@ class Type extends HTMLElement {
       this.shadow.innerHTML =
       /*html*/`
       <style>
+        .type {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
         .type-icon {
           display: block;
-          --size: 10rem;
+          --size: 8rem;
           width: var(--size);
           height: var(--size);
           background-color: red;
