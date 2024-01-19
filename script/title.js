@@ -3,7 +3,6 @@ class Title extends HTMLElement {
     constructor () {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
-      this.type = this.getAttribute('type')
     }
   
     connectedCallback () {

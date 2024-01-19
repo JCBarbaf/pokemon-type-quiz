@@ -3,6 +3,7 @@ class Type extends HTMLElement {
     constructor () {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
+      this.type = this.getAttribute('type')
     }
   
     connectedCallback () {
@@ -13,11 +14,21 @@ class Type extends HTMLElement {
       this.shadow.innerHTML =
       /*html*/`
       <style>
-        
+        .type-icon {
+          display: block;
+          --size: 10rem;
+          width: var(--size);
+          height: var(--size);
+          background-color: red;
+          border-radius: 50%;
+        }
+        .type-name {
+          text-align: center;
+        }
       </style>
       <div class="type">
-        <img class="type-icon" src="img/types/fire_type.svg" alt="" title="">
-        <p>fire</p>
+        <img class="type-icon" src="img/type_icons/${this.type}_type.svg" alt="${this.type}" title="${this.type}">
+        <p class="type-name">${this.type}</p>
       </div>
       `
     }

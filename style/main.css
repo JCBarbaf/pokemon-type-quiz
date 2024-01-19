@@ -12,9 +12,29 @@
     color: inherit;
 }
 body {
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     background: rgb(68, 68, 68);
     background-attachment: fixed;
     font-family: 'pokemon classic', Arial, Helvetica, sans-serif;
     color: var(--white);
+}
+.quiz-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.quiz {
+  flex: 1;
+}
+.pokemon-image {
+  --size: 30rem;
+  width: var(--size);
+  height: var(--size);
+}
+.types-gallery {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
 }
