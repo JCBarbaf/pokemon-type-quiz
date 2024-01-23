@@ -4,6 +4,7 @@
 }
 :root {
     --white: rgb(224, 224, 224);
+    --border: 0.3rem solid rgb(178, 177, 178);
 }
 * {
     box-sizing: border-box;
@@ -21,20 +22,30 @@ body {
 .quiz-main {
   display: flex;
   justify-content: center;
+}
+.quiz-container {
+  flex: 1.5;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 .quiz {
-  flex: 1.5;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
-  padding-top: 2%;
+  align-items: stretch;
+}
+.pokemon-types {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-bottom: 5%;
 }
 .pokemon-name {
   padding: 1%;
   background: rgb(238, 64, 53) linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.2) 100%);
-  border: 0.5rem solid rgb(178, 177, 178);
+  border: var(--border);
   border-radius: 1rem 1rem 0 0;
   text-align: center;
 }
@@ -45,7 +56,7 @@ body {
   padding: 5%;
   margin-bottom: 2%;
   background-color: var(--white);
-  border: 0.5rem solid rgb(178, 177, 178);
+  border: var(--border);
   border-top: 0;
   border-radius: 0 0 1rem 1rem;
   object-fit: cover;
@@ -53,6 +64,7 @@ body {
 .types {
   width: 45%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 .type-title {
@@ -60,9 +72,39 @@ body {
   text-align: center;
   margin-bottom: 10%;
 }
-.lifes {
-  width: 100%;
+.button-lives {
   display: flex;
+  justify-content: space-between;
+}
+.pokeball-button {
+  width: 25rem;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+.check-button {
+  width: 100%;
+  /* height: 6rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(185, 185, 185) linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+  border: 5px solid rgb(88, 88, 90);
+  border-radius: 1rem;
+  font: inherit;
+  font-size: 1.5rem;
+}
+.upper-half {
+  transform: translateX(50%);
+}
+.lower-half {
+  transform: translateX(-50%);
+}
+.lives {
+  /* width: 100%; */
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 1%;
 }
@@ -72,12 +114,16 @@ body {
   height: var(--size);
 }
 .types-gallery {
+  /* background-color: blue; */
+  /* height: 80vh; */
   flex: 2;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  padding: 3%;
 }
 .types-gallery type-component {
   width: 15%;
+  margin: 1% auto;
 }

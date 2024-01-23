@@ -24,7 +24,7 @@ class Title extends HTMLElement {
         .title {
             margin: 0;
             padding: 2% 0;
-            font-size: 2rem;
+            font-size: 1.5rem;
             text-align: center;
         }
         .white-part {

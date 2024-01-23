@@ -11,54 +11,64 @@
     <script type="module" src="script/app.js"></script>
 </head>
 <body>
-    <background-component></background-component>
+    <!-- <background-component></background-component> -->
     <title-component></title-component>
     <main class="quiz-main">
-      <div class="quiz">
-        <div class="pokemon">
-          <h2 class="pokemon-name">Gengar</h2>
-          <img class="pokemon-image" src="img/pokemon/gengar.png" alt="Gengar" title="Gengar">
-        </div>
-        <div class="types">
-          <div class="type-container">
-            <h3 class="type-title">Type 1</h3>
-            <div class="type-drop">
-              <type-component type="ghost"></type-component>
+      <div class="quiz-container">
+        <div class="quiz">
+          <div class="pokemon-types">
+            <div class="pokemon">
+              <h2 class="pokemon-name">Gengar</h2>
+              <img class="pokemon-image" src="img/pokemon/gengar.png" alt="Gengar" title="Gengar">
+            </div>
+            <div class="types">
+              <div class="type-container">
+                <h3 class="type-title">Type 1</h3>
+                <div class="type-drop">
+                  <type-component type="ghost"></type-component>
+                </div>
+              </div>
+              <div class="type-container">
+                <h3 class="type-title">Type 2</h3>
+                <div class="type-drop">
+                  <type-component type="poison"></type-component>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="type-container">
-            <h3 class="type-title">Type 2</h3>
-            <div class="type-drop">
-              <type-component type="poison"></type-component>
+          <div class="button-lives">
+            <div class="pokeball-button">
+              <img class="upper-half" src="img/pokeball-upper-part.svg">
+              <button class="check-button">Check</button>
+              <img class="lower-half" src="img/pokeball-lower-part.svg">
+            </div>
+            <div class="lives">
+              <img class="life" src="img/pokeball.svg" alt="Life" title="Life">
+              <img class="life" src="img/pokeball.svg" alt="Life" title="Life">
+              <img class="life" src="img/pokeball.svg" alt="Life" title="Life">
             </div>
           </div>
-        </div>
-        <div class="lifes">
-          <p>Lifes:</p>
-          <img class="life" src="img/pokeball.svg" alt="Life" title="Life">
-          <img class="life" src="img/pokeball.svg" alt="Life" title="Life">
-          <img class="life" src="img/pokeball.svg" alt="Life" title="Life">
         </div>
       </div>
       <div class="types-gallery">
-        <type-component type="normal"></type-component>
-        <type-component type="fire"></type-component>
-        <type-component type="water"></type-component>
-        <type-component type="grass"></type-component>
-        <type-component type="electric"></type-component>
-        <type-component type="ice"></type-component>
-        <type-component type="fighting"></type-component>
-        <type-component type="poison"></type-component>
-        <type-component type="ground"></type-component>
-        <type-component type="flying"></type-component>
-        <type-component type="psychic"></type-component>
-        <type-component type="bug"></type-component>
-        <type-component type="rock"></type-component>
-        <type-component type="ghost"></type-component>
-        <type-component type="dragon"></type-component>
-        <type-component type="dark"></type-component>
-        <type-component type="steel"></type-component>
-        <type-component type="fairy"></type-component>
+        <type-component type="normal" type-color="#9099A1"></type-component>
+        <type-component type="fire" type-color="#FF9C54"></type-component>
+        <type-component type="water" type-color="#4D90D5"></type-component>
+        <type-component type="grass" type-color="#63BB5B"></type-component>
+        <type-component type="electric" type-color="#F3D23B"></type-component>
+        <type-component type="ice" type-color="#74CEC0"></type-component>
+        <type-component type="fighting" type-color="#CE4069"></type-component>
+        <type-component type="poison" type-color="#AB6AC8"></type-component>
+        <type-component type="ground" type-color="#D97746"></type-component>
+        <type-component type="flying" type-color="#0087FF"></type-component>
+        <type-component type="psychic" type-color="#F97176"></type-component>
+        <type-component type="bug" type-color="#90C12C"></type-component>
+        <type-component type="rock" type-color="#C7B78B"></type-component>
+        <type-component type="ghost" type-color="#5269AC"></type-component>
+        <type-component type="dragon" type-color="#0A6DC4"></type-component>
+        <type-component type="dark" type-color="#5A5366"></type-component>
+        <type-component type="steel" type-color="#5A8EA1"></type-component>
+        <type-component type="fairy" type-color="#EC8FE6"></type-component>
       </div>
     </main>
 </body>
