@@ -20,17 +20,25 @@ class Type extends HTMLElement {
           flex-direction: column;
           align-items: center;
         }
-        .type-icon {
+        .type-container {
           display: block;
           --size: 8rem;
           width: var(--size);
           height: var(--size);
+          display: flex;
+          justify-content: center;
+          align-items: center;
           background-color: ${this.typeColor ? this.typeColor : 'grey'};
           border: 0.4rem solid rgb(0,0,0,0.2);
           border-radius: 50%;
           cursor: pointer;
         }
-        .type-icon:hover {
+        .type-container img {
+          --size: 90%;
+          width: var(--size);
+          height: var(--size);
+        }
+        .type-container:has(img):hover {
           transform: scale(1.05);
         }
         .type-name {
@@ -38,10 +46,20 @@ class Type extends HTMLElement {
         }
       </style>
       <div class="type">
-        <img class="type-icon" src="img/type_icons/${this.type}_type.svg" alt="${this.type}" title="${this.type}">
-        <p class="type-name">${this.type}</p>
+        <div class="type-container"></div>
+        <p class="type-name">${this.type ?? 'none'}</p>
       </div>
       `
+      const typeContainer = this.shadow.querySelector('.type-container')
+      // console.log('hola')
+      if (this.type) {
+        let typeIcon = document.createElement('img')
+        console.log(typeIcon)
+        typeIcon.src = `img/type_icons/${this.type}_type.svg`
+        typeIcon.alt = this.type
+        typeIcon.alt = this.type
+        typeContainer.appendChild(typeIcon)
+      } 
     }
   }
   
