@@ -42,25 +42,6 @@ body {
   align-items: stretch;
   margin-bottom: 5%;
 }
-.pokemon-name {
-  padding: 1%;
-  background: rgb(238, 64, 53) linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.2) 100%);
-  border: var(--border);
-  border-radius: 1rem 1rem 0 0;
-  text-align: center;
-}
-.pokemon-image {
-  --size: 25rem;
-  width: var(--size);
-  height: var(--size);
-  padding: 5%;
-  margin-bottom: 2%;
-  background-color: var(--white);
-  border: var(--border);
-  border-top: 0;
-  border-radius: 0 0 1rem 1rem;
-  object-fit: cover;
-}
 .types {
   width: 45%;
   display: flex;
@@ -76,69 +57,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.button-container {
-  width: 25rem;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
-.pokeball-button {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  cursor: pointer;
-}
-.pokeball-button:hover {
-  transform: scale(1.05);
-}
-.pokeball-button:has(:disabled) {
-  /* width: auto; */
-  animation: button-rotate 1s ease-in forwards;
-}
-.check-button {
-  width: 20rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(185, 185, 185) linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
-  border: 5px solid rgb(88, 88, 90);
-  border-radius: 1rem;
-  cursor: pointer;
-  font: inherit;
-  font-size: 1.5rem;
-}
-.check-button:disabled {
-  overflow: hidden;
-  animation: button-close 1s ease-in forwards;
-}
-.upper-half {
-  transform: translateX(50%);
-}
-.lower-half {
-  transform: translateX(-50%);
-}
-@keyframes button-close {
-  0% {
-    width: 20rem;
-  }
-  50% {
-    width: 2.5rem;
-  }
-  100% {
-    width: 2.5rem;
-  }
-}
-@keyframes button-rotate {
-  0% {
-    transform: rotate(0);
-  }
-  50% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(90deg);    
-  }
-}
+
 .lives {
   flex: 1;
   display: flex;

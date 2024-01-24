@@ -31,6 +31,7 @@ class Type extends HTMLElement {
           background-color: ${this.typeColor ? this.typeColor : 'grey'};
           border: 0.4rem solid rgb(0,0,0,0.2);
           border-radius: 50%;
+          box-shadow: 0.3rem 0.3rem 0 0 rgba(0,0,0,0.1);
           cursor: pointer;
         }
         .type-container img {
@@ -43,6 +44,7 @@ class Type extends HTMLElement {
         }
         .type-name {
           text-align: center;
+          text-transform: capitalize;
         }
       </style>
       <div class="type">
@@ -54,7 +56,6 @@ class Type extends HTMLElement {
       // console.log('hola')
       if (this.type) {
         let typeIcon = document.createElement('img')
-        console.log(typeIcon)
         typeIcon.src = `img/type_icons/${this.type}_type.svg`
         typeIcon.alt = this.type
         typeIcon.alt = this.type
