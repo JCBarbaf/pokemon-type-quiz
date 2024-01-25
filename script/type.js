@@ -8,6 +8,9 @@ class Type extends HTMLElement {
     }
   
     connectedCallback () {
+      document.addEventListener('updateType', (event => {
+        this.render()
+      }));
       this.render()
     }
   
@@ -53,14 +56,18 @@ class Type extends HTMLElement {
       </div>
       `
       const typeContainer = this.shadow.querySelector('.type-container')
-      // console.log('hola')
       if (this.type) {
+        typeContainer.draggable =  true
         let typeIcon = document.createElement('img')
         typeIcon.src = `img/type_icons/${this.type}_type.svg`
         typeIcon.alt = this.type
         typeIcon.alt = this.type
+        typeIcon.draggable =  false
         typeContainer.appendChild(typeIcon)
-      } 
+      }
+      typeContainer.addEventListener('dragstart', (event) => {
+        event.dataTransfer.setData("type", this.type);
+      })
     }
   }
   

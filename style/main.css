@@ -48,11 +48,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
-.type-title {
-  margin: auto;
-  text-align: center;
-  margin-bottom: 10%;
-}
+
 .button-lives {
   display: flex;
   justify-content: space-between;
