@@ -4,13 +4,13 @@
 }
 :root {
     --white: rgb(224, 224, 224);
-    --border: 0.3rem solid rgb(178, 177, 178);
 }
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     color: inherit;
+    
 }
 body {
     /* overflow-y: hidden; */
