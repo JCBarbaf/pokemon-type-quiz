@@ -1,3 +1,4 @@
+import './callHandler.js';
 import './background.js';
 import './title.js';
 import './pokemon.js';

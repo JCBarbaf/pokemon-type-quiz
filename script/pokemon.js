@@ -3,9 +3,14 @@ class Pokemon extends HTMLElement {
     constructor () {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
+      this.callList
     }
   
     connectedCallback () {
+      document.addEventListener('loadInfo', (event) => {
+        this.callList = event.detail.callList
+        this.loadInfo()
+      })
       this.render()
     }
   
@@ -47,6 +52,11 @@ class Pokemon extends HTMLElement {
         <img class="pokemon-image" src="img/pokemon/gengar.png" alt="Gengar" title="Gengar">
       </div>
       `
+    }
+    loadInfo() {
+      let random = Math.floor(Math.random() * this.callList.length);
+
+      console.log(this.callList[random])
     }
   }
   
