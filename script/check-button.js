@@ -3,9 +3,18 @@ class CheckButton extends HTMLElement {
     constructor () {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
+      this.typeOne = null
+      this.typeTwo = null
     }
   
     connectedCallback () {
+      document.addEventListener('updateType', (event) => {
+        if (event.detail.typeNumber == 1) {
+          this.typeOne = event.detail.type
+        } else if (event.detail.typeNumber == 2) {
+          this.typeTwo = event.detail.type
+        }
+      })
       this.render()
     }
   
@@ -95,6 +104,12 @@ class CheckButton extends HTMLElement {
       const button = this.shadow.querySelector('.pokeball-button')
       button.addEventListener('click', ()=> {
         button.querySelector('button').disabled = true;
+        document.dispatchEvent(new CustomEvent('checkTypes', {
+          detail: {
+            typeOne: this.typeOne,
+            typeTwo: this.typeTwo,
+          }
+        }))
       })
     }
   }

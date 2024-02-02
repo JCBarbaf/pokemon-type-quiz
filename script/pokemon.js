@@ -4,12 +4,20 @@ class Pokemon extends HTMLElement {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
       this.callList
+      this.pokemonName
+      this.pokemonImage
+      this.typeOne
+      this.typeTwo
+      this.difficulty = 'normal'
     }
   
     connectedCallback () {
-      document.addEventListener('loadInfo', (event) => {
+      document.addEventListener('loaded', (event) => {
         this.callList = event.detail.callList
         this.loadInfo()
+      })
+      document.addEventListener('checkTypes', (event) => {
+        this.checkTypes(event.detail.typeOne, event.detail.typeTwo)
       })
       this.render()
     }
@@ -21,6 +29,7 @@ class Pokemon extends HTMLElement {
         :host {
           --white: rgb(224, 224, 224);
           --border: 0.3rem solid rgb(178, 177, 178);
+          --size: 25rem;
           /*width: 25rem;*/
         }
         * {
@@ -28,16 +37,18 @@ class Pokemon extends HTMLElement {
           padding: 0;
         }
         .pokemon-name {
-          padding: 1%;
+          width: var(--size);
+          padding: 2% 0;
           background: rgb(238, 64, 53) linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.2) 100%);
           border: var(--border);
           border-radius: 1rem 1rem 0 0;
-          text-align: center;
           box-shadow: 0.5rem 0.5rem 0 0 rgba(0,0,0,0.1);
+          font-size: 1.5rem;
+          text-align: center;
+          text-transform: capitalize;
         }
         .pokemon-image {
           box-shadow: 0.5rem 0.5rem 0 0 rgba(0,0,0,0.1);
-          --size: 25rem;
           width: var(--size);
           height: var(--size);
           background-color: var(--white);
@@ -48,15 +59,55 @@ class Pokemon extends HTMLElement {
         }
       </style>
       <div class="pokemon">
-        <h2 class="pokemon-name">Gengar</h2>
-        <img class="pokemon-image" src="img/pokemon/gengar.png" alt="Gengar" title="Gengar">
+        <h2 class="pokemon-name">${this.pokemonName}</h2>
+        <img class="pokemon-image" src="${this.pokemonImage ? this.pokemonImage:'img/pokeball-negative.svg'}" alt="${this.pokemonName}" title="${this.pokemonName}">
       </div>
       `
     }
     loadInfo() {
       let random = Math.floor(Math.random() * this.callList.length);
-
-      console.log(this.callList[random])
+      // random = 1153
+      let apiUrl = this.callList[random]
+      fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(pokemonData => {
+        this.pokemonName = pokemonData.forms[0].name.replaceAll('-',' ')
+        this.typeOne = pokemonData.types[0].type.name
+        if (pokemonData.types[1]) {
+          this.typeTwo = pokemonData.types[1].type.name
+        } else {
+          this.typeTwo = null
+        }
+        this.pokemonImage = pokemonData.sprites.other['official-artwork'].front_default
+        this.render()
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+    checkTypes(typeOne,typeTwo) {
+      console.log(`selected types: type1: ${typeOne}, type2: ${typeTwo} -- real types: type1: ${this.typeOne}, type2: ${this.typeTwo}`)
+      this.loadInfo()
+      if (this.difficulty == 'easy') {
+        
+      } else if (this.difficulty == 'normal') {
+        if (typeOne == this.typeOne || typeTwo == this.typeOne) {
+          if (typeOne == this.typeTwo || typeTwo == this.typeTwo) {
+            alert('muy bien')
+          } else {
+            alert('no es correcto')
+          }
+        } else {
+          alert('no es correcto')
+        }
+      } else if (this.difficulty == 'difficult') {
+        
+      }
     }
   }
   
