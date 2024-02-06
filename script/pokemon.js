@@ -47,24 +47,52 @@ class Pokemon extends HTMLElement {
           text-align: center;
           text-transform: capitalize;
         }
-        .pokemon-image {
+        .image-container {
           box-shadow: 0.5rem 0.5rem 0 0 rgba(0,0,0,0.1);
           width: var(--size);
           height: var(--size);
+          position: relative;
           background-color: var(--white);
           border: var(--border);
           border-top: 0;
           border-radius: 0 0 1rem 1rem;
+        }
+        .pokemon-image {
+          width: 100%;
+          height: 100%;
           object-fit: cover;
+        }
+        .cross-tick {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+        }
+        .cross-tick.active {
+          animation: 
+        }
+        @keyframe pulsate {
+          0% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
         }
       </style>
       <div class="pokemon">
         <h2 class="pokemon-name">${this.pokemonName}</h2>
+        <div class="image-container">
         <img class="pokemon-image" src="${this.pokemonImage ? this.pokemonImage:'img/pokeball-negative.svg'}" alt="${this.pokemonName}" title="${this.pokemonName}">
+        <img class="cross-tick" src="img/tick.svg">
+        </div>
       </div>
       `
     }
     loadInfo() {
+      this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto']
       let random = Math.floor(Math.random() * this.callList.length);
       // random = 1153
       let apiUrl = this.callList[random]
@@ -92,18 +120,20 @@ class Pokemon extends HTMLElement {
     }
     checkTypes(typeOne,typeTwo) {
       console.log(`selected types: type1: ${typeOne}, type2: ${typeTwo} -- real types: type1: ${this.typeOne}, type2: ${this.typeTwo}`)
-      this.loadInfo()
       if (this.difficulty == 'easy') {
         
       } else if (this.difficulty == 'normal') {
         if (typeOne == this.typeOne || typeTwo == this.typeOne) {
           if (typeOne == this.typeTwo || typeTwo == this.typeTwo) {
             alert('muy bien')
+            this.loadInfo()
           } else {
-            alert('no es correcto')
+            // alert('no es correcto')
+            document.dispatchEvent(new CustomEvent('wrongAnswer'))
           }
         } else {
-          alert('no es correcto')
+          // alert('no es correcto')
+          document.dispatchEvent(new CustomEvent('wrongAnswer'))
         }
       } else if (this.difficulty == 'difficult') {
         

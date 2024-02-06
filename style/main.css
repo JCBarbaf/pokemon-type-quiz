@@ -53,19 +53,6 @@ body {
   display: flex;
   justify-content: space-between;
 }
-
-.lives {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5%;
-}
-.life {
-  --size: 2rem;
-  width: var(--size);
-  height: var(--size);
-}
 .types-gallery {
   /* background-color: blue; */
   /* height: 80vh; */

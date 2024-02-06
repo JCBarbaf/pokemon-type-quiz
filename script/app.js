@@ -6,3 +6,4 @@ import './pokemon.js';
 import './type-container.js';
 import './type.js';
 import './check-button.js';
+import './lives.js';

@@ -101,9 +101,9 @@ class CheckButton extends HTMLElement {
         </div>
       </div>
       `
-      const button = this.shadow.querySelector('.pokeball-button')
+      const button = this.shadow.querySelector('.check-button')
       button.addEventListener('click', ()=> {
-        button.querySelector('button').disabled = true;
+        // button.disabled = true;
         document.dispatchEvent(new CustomEvent('checkTypes', {
           detail: {
             typeOne: this.typeOne,
