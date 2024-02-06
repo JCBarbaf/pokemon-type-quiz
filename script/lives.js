@@ -7,7 +7,10 @@ class Lives extends HTMLElement {
   
     connectedCallback () {
       document.addEventListener('wrongAnswer', (event) => {
-        this.loseLive()
+        this.loseLife()
+      })
+      document.addEventListener('reset', (event) => {
+        this.resetLives()
       })
       this.render()
     }
@@ -38,6 +41,9 @@ class Lives extends HTMLElement {
           0% {
             transform: rotate(0deg) scale(1);
           }
+          10% {
+            transform: rotate(0deg) scale(1.5);
+          }
           99% {
             transform: rotate(720deg) scale(0);
             display: block;
@@ -54,14 +60,21 @@ class Lives extends HTMLElement {
       </div>
       `
     }
-    loseLive() {
+    loseLife() {
       let lives = this.shadow.querySelectorAll('.life:not(.lost)')
       lives[lives.length-1].classList.add('lost')
       if (lives.length == 1) {
-        console.log('sacabo')
+        // console.log('sacabo')
+        document.dispatchEvent(new CustomEvent('loose'))
       }
       // console.log(lives)
       // lives.pop()
+    }
+    resetLives() {
+      let lives = this.shadow.querySelectorAll('.life')
+      lives.forEach((life) => {
+        life.classList.remove('lost')
+      })
     }
   }
   

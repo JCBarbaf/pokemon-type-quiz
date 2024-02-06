@@ -7,6 +7,9 @@ class TypeContainer extends HTMLElement {
     }
   
     connectedCallback () {
+      document.addEventListener('reset', () => {
+        this.removeType()
+      })
       this.render()
     }
   
@@ -64,8 +67,7 @@ class TypeContainer extends HTMLElement {
       })
       typeContainer.addEventListener('click', (event) => {
         if(event.target.closest('.remove-type')) {
-          typeContainer.classList.remove('loaded')
-          this.typeHandler(null)
+          this.removeType()
         }
       })
     }
@@ -77,6 +79,11 @@ class TypeContainer extends HTMLElement {
           type: type
         }
       }));
+    }
+    removeType () {
+      const typeContainer = this.shadow.querySelector('.type-container')
+      typeContainer.classList.remove('loaded')
+      this.typeHandler(null)
     }
   }
   

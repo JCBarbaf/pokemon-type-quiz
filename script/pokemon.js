@@ -19,6 +19,9 @@ class Pokemon extends HTMLElement {
       document.addEventListener('checkTypes', (event) => {
         this.checkTypes(event.detail.typeOne, event.detail.typeTwo)
       })
+      document.addEventListener('loose', (event) => {
+        this.showCrosssTick(false)
+      })
       this.render()
     }
   
@@ -68,17 +71,24 @@ class Pokemon extends HTMLElement {
           bottom: 0;
           left: 0;
           right: 0;
+          visibility: hidden;
           margin: auto;
         }
         .cross-tick.active {
-          animation: 
+          visibility: visible;
+          animation: pulsate 1s ease-out forwards;
         }
-        @keyframe pulsate {
+        @keyframes pulsate {
           0% {
+            opacity: 0;
+            transform: scale(0.2)
+          }
+          50% {
             opacity: 1;
+            transform: scale(1.1)
           }
           100% {
-            opacity: 0;
+            transform: scale(1)
           }
         }
       </style>
@@ -92,7 +102,7 @@ class Pokemon extends HTMLElement {
       `
     }
     loadInfo() {
-      this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto']
+      // this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto']
       let random = Math.floor(Math.random() * this.callList.length);
       // random = 1153
       let apiUrl = this.callList[random]
@@ -125,8 +135,9 @@ class Pokemon extends HTMLElement {
       } else if (this.difficulty == 'normal') {
         if (typeOne == this.typeOne || typeTwo == this.typeOne) {
           if (typeOne == this.typeTwo || typeTwo == this.typeTwo) {
-            alert('muy bien')
-            this.loadInfo()
+            // alert('muy bien')
+            this.showCrosssTick(true)
+            // this.loadInfo()
           } else {
             // alert('no es correcto')
             document.dispatchEvent(new CustomEvent('wrongAnswer'))
@@ -138,6 +149,20 @@ class Pokemon extends HTMLElement {
       } else if (this.difficulty == 'difficult') {
         
       }
+    }
+    showCrosssTick(showTick) {
+      const crossTick = this.shadow.querySelector('.cross-tick')
+      if (showTick) {
+        crossTick.src = 'img/tick.svg'
+      } else {
+        crossTick.src = 'img/cross.svg'
+      }
+      crossTick.classList.add('active')
+      setTimeout(() => {
+        crossTick.classList.remove('active')
+        this.loadInfo()
+        document.dispatchEvent(new CustomEvent('reset'))
+      }, 1000)
     }
   }
   
