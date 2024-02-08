@@ -140,11 +140,11 @@ class Pokemon extends HTMLElement {
             // this.loadInfo()
           } else {
             // alert('no es correcto')
-            document.dispatchEvent(new CustomEvent('wrongAnswer'))
+            this.wrongAnswer()
           }
         } else {
           // alert('no es correcto')
-          document.dispatchEvent(new CustomEvent('wrongAnswer'))
+          this.wrongAnswer()
         }
       } else if (this.difficulty == 'difficult') {
         
@@ -163,6 +163,15 @@ class Pokemon extends HTMLElement {
         this.loadInfo()
         document.dispatchEvent(new CustomEvent('reset'))
       }, 1000)
+    }
+    wrongAnswer() {
+      document.dispatchEvent(new CustomEvent('wrongAnswer', {
+        detail: {
+          difficulty: this.difficulty,
+          typeOne: this.typeOne,
+          typeTwo: this.typeTwo
+        }
+      }))
     }
   }
   

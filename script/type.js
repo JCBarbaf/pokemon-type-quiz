@@ -5,12 +5,18 @@ class Type extends HTMLElement {
       this.shadow = this.attachShadow({ mode: 'open' })
       this.type = this.getAttribute('type');
       this.typeColor = this.getAttribute('type-color');
+      this.typeNumber = this.getAttribute('type-number');
     }
   
     connectedCallback () {
       document.addEventListener('updateType', (event => {
         this.render()
       }));
+      document.addEventListener('wrongAnswer', (event) => {
+        if (this.typeNumber) {
+          this.clue(event.detail.difficulty, event.detail.typeOne, event.detail.typeTwo)
+        }
+      })
       this.render()
     }
   
@@ -38,6 +44,9 @@ class Type extends HTMLElement {
           --steel-color: rgb(90, 142, 161);
           --fairy-color: rgb(236, 143, 230);
           --grey-color: rgb(122, 122, 122);
+          --green: rgb(12,150,0);
+          --red: rgb(203,41,41);
+          --yellow: rgb(255,255,0);
         }
         .type {
           display: flex;
@@ -70,6 +79,15 @@ class Type extends HTMLElement {
           text-align: center;
           text-transform: capitalize;
         }
+        .wrong {
+          border-color: var(--red)
+        }
+        .correct {
+          border-color: var(--green)
+        }
+        .not-order {
+          border-color: var(--yellow)
+        }
       </style>
       <div class="type">
         <div class="type-container"></div>
@@ -89,6 +107,24 @@ class Type extends HTMLElement {
       typeContainer.addEventListener('dragstart', (event) => {
         event.dataTransfer.setData("type", this.type);
       })
+    }
+    clue(difficulty, typeOne, typeTwo) {
+      console.log(this.type + " "+ typeOne + " " + typeTwo)
+      const typeContainer =this.shadow.querySelector('.type-container')
+      typeContainer.classList.remove('wrong')
+      typeContainer.classList.remove('correct')
+      typeContainer.classList.remove('not-order')
+      if (difficulty == 'normal') {
+        if (typeOne == this.type || typeTwo == this.type) {
+          typeContainer.classList.add('correct')
+        } else {
+          typeContainer.classList.add('wrong')
+        }
+      } else if (difficulty == 'difficult') {
+        
+      } {
+        
+      }
     }
   }
   

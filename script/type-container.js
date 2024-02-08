@@ -52,7 +52,7 @@ class TypeContainer extends HTMLElement {
         <h3 class="type-title">Type ${this.typeNumber}</h3>
         <div class="type-drop">
           <button class="remove-type">X</button>
-          <type-component></type-component>
+          <type-component type-number="${this.typeNumber}"></type-component>
         </div>
       </div>
       `
