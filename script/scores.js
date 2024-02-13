@@ -4,7 +4,6 @@ class Scores extends HTMLElement {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
       this.score = 0
-      this.bestScore = 0 || localStorage.getItem("bestScore", this.bestScore);
     }
   
     connectedCallback () {
@@ -66,16 +65,15 @@ class Scores extends HTMLElement {
             <title>High score</title>
             <path d="M50 0L61.2257 34.5491H97.5528L68.1636 55.9017L79.3893 90.4509L50 69.0983L20.6107 90.4509L31.8364 55.9017L2.44717 34.5491H38.7743L50 0Z" fill="#C4C411"/>
           </svg>
-          <p class="best-score" title="High score">${this.bestScore}</p>
+          <p class="best-score" title="High score">${localStorage.getItem("bestScore") || 0}</p>
         </div>
       </div>
       `
     }
     addPoint() {
       this.score++
-      if (this.score > this.bestScore) {
-        this.bestScore++
-        localStorage.setItem("bestScore", this.bestScore);
+      if (this.score > localStorage.getItem("bestScore")) {
+        localStorage.setItem("bestScore", this.score);
       }
       this.render()
     }
