@@ -57,15 +57,14 @@ class Scores extends HTMLElement {
         }
       </style>
       <div class="scores">
-        <div class=" score current">
-          <p class="current-score" title="Score">${this.score}</p>
+        <div class=" score current" title="Score">
+          <p class="current-score">${this.score}</p>
         </div>
-        <div class=" score best">
+        <div class=" score best" title="High score">
           <svg class="star" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <title>High score</title>
             <path d="M50 0L61.2257 34.5491H97.5528L68.1636 55.9017L79.3893 90.4509L50 69.0983L20.6107 90.4509L31.8364 55.9017L2.44717 34.5491H38.7743L50 0Z" fill="#C4C411"/>
           </svg>
-          <p class="best-score" title="High score">${localStorage.getItem("bestScore") || 0}</p>
+          <p class="best-score">${localStorage.getItem("bestScore") || 0}</p>
         </div>
       </div>
       `
