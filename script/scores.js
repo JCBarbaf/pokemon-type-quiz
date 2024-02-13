@@ -4,7 +4,7 @@ class Scores extends HTMLElement {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
       this.score = 0
-      this.bestScore = 0
+      this.bestScore = 0 || localStorage.getItem("bestScore", this.bestScore);
     }
   
     connectedCallback () {
@@ -70,16 +70,12 @@ class Scores extends HTMLElement {
         </div>
       </div>
       `
-      const currentScore = this.shadow.querySelector('.current.score')
-      currentScore.addEventListener('click', () => {
-        this.addPoint()
-      })
-
     }
     addPoint() {
       this.score++
       if (this.score > this.bestScore) {
         this.bestScore++
+        localStorage.setItem("bestScore", this.bestScore);
       }
       this.render()
     }
