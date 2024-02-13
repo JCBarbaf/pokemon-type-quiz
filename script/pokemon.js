@@ -9,6 +9,9 @@ class Pokemon extends HTMLElement {
       this.typeOne
       this.typeTwo
       this.difficulty = 'normal'
+      this.correctAnimationTime = 700
+      this.wrongAnimationTime = 2000
+      this.animationTime = this.correctAnimationTime
     }
   
     connectedCallback () {
@@ -20,6 +23,13 @@ class Pokemon extends HTMLElement {
         this.checkTypes(event.detail.typeOne, event.detail.typeTwo)
       })
       document.addEventListener('loose', (event) => {
+        document.dispatchEvent(new CustomEvent('revealTypes', {
+          detail: {
+            typeOne: this.typeOne,
+            typeTwo: this.typeTwo
+          }
+        }))
+        this.animationTime = this.wrongAnimationTime
         this.showCrosssTick(false)
       })
       this.render()
@@ -76,7 +86,7 @@ class Pokemon extends HTMLElement {
         }
         .cross-tick.active {
           visibility: visible;
-          animation: pulsate 1s ease-out forwards;
+          animation: pulsate ${this.animationTime}ms ease-out forwards;
         }
         @keyframes pulsate {
           0% {
@@ -95,14 +105,14 @@ class Pokemon extends HTMLElement {
       <div class="pokemon">
         <h2 class="pokemon-name">${this.pokemonName}</h2>
         <div class="image-container">
-        <img class="pokemon-image" src="${this.pokemonImage ? this.pokemonImage:'img/pokeball-negative.svg'}" alt="${this.pokemonName}" title="${this.pokemonName}">
-        <img class="cross-tick" src="img/tick.svg">
+        <img class="pokemon-image" src="${this.pokemonImage ? this.pokemonImage:'img/pokeball-negative.svg'}" alt="${this.pokemonName}" title="${this.pokemonName}" draggable="false">
+        <img class="cross-tick" src="img/tick.svg" draggable="false">
         </div>
       </div>
       `
     }
     loadInfo() {
-      // this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto']
+      // this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/sandslash','https://pokeapi.co/api/v2/pokemon/pupitar','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/mudkip','https://pokeapi.co/api/v2/pokemon/entei','https://pokeapi.co/api/v2/pokemon/bulbasaur']
       let random = Math.floor(Math.random() * this.callList.length);
       // random = 1153
       let apiUrl = this.callList[random]
@@ -135,19 +145,18 @@ class Pokemon extends HTMLElement {
       } else if (this.difficulty == 'normal') {
         if (typeOne == this.typeOne || typeTwo == this.typeOne) {
           if (typeOne == this.typeTwo || typeTwo == this.typeTwo) {
-            // alert('muy bien')
             this.showCrosssTick(true)
-            // this.loadInfo()
           } else {
-            // alert('no es correcto')
             this.wrongAnswer()
           }
         } else {
-          // alert('no es correcto')
           this.wrongAnswer()
         }
       } else if (this.difficulty == 'difficult') {
         
+      }
+      if (typeOne == typeTwo) {
+        document.dispatchEvent(new CustomEvent('sameTypes'))
       }
     }
     showCrosssTick(showTick) {
@@ -162,7 +171,8 @@ class Pokemon extends HTMLElement {
         crossTick.classList.remove('active')
         this.loadInfo()
         document.dispatchEvent(new CustomEvent('reset'))
-      }, 1000)
+        this.animationTime = this.correctAnimationTime
+      }, this.animationTime)
     }
     wrongAnswer() {
       document.dispatchEvent(new CustomEvent('wrongAnswer', {

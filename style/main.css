@@ -53,8 +53,6 @@ body {
   justify-content: space-between;
 }
 .types-gallery {
-  /* background-color: blue; */
-  /* height: 80vh; */
   flex: 2;
   display: flex;
   justify-content: flex-start;

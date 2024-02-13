@@ -6,6 +6,7 @@ class Type extends HTMLElement {
       this.type = this.getAttribute('type');
       this.typeColor = this.getAttribute('type-color');
       this.typeNumber = this.getAttribute('type-number');
+      this.forceWrong = false
     }
   
     connectedCallback () {
@@ -16,6 +17,20 @@ class Type extends HTMLElement {
         if (this.typeNumber) {
           this.clue(event.detail.difficulty, event.detail.typeOne, event.detail.typeTwo)
         }
+      })
+      document.addEventListener('sameTypes', (event) => {
+        if (this.typeNumber == 2) {
+          this.forceWrong= true
+        }
+      })
+      document.addEventListener('revealTypes', (event) => {
+        if (this.typeNumber == 1) {
+          this.type = event.detail.typeOne
+        }
+        if (this.typeNumber == 2) {
+          this.type = event.detail.typeTwo
+        }
+        this.render()
       })
       this.render()
     }
@@ -109,22 +124,25 @@ class Type extends HTMLElement {
       })
     }
     clue(difficulty, typeOne, typeTwo) {
-      console.log(this.type + " "+ typeOne + " " + typeTwo)
+      if (difficulty == 'normal') {
+        if (typeOne == this.type || typeTwo == this.type) {
+          this.addClass('correct')
+        } else {
+          this.addClass('wrong')
+        }
+      } else if (difficulty == 'difficult') {
+        
+      }
+      if (this.forceWrong) {
+        this.addClass('wrong')
+      }
+    }
+    addClass(selectedClass) {
       const typeContainer =this.shadow.querySelector('.type-container')
       typeContainer.classList.remove('wrong')
       typeContainer.classList.remove('correct')
       typeContainer.classList.remove('not-order')
-      if (difficulty == 'normal') {
-        if (typeOne == this.type || typeTwo == this.type) {
-          typeContainer.classList.add('correct')
-        } else {
-          typeContainer.classList.add('wrong')
-        }
-      } else if (difficulty == 'difficult') {
-        
-      } {
-        
-      }
+      typeContainer.classList.add(selectedClass)
     }
   }
   

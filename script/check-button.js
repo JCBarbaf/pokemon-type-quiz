@@ -15,6 +15,14 @@ class CheckButton extends HTMLElement {
           this.typeTwo = event.detail.type
         }
       })
+      document.addEventListener('loose', (event) => {
+        const button = this.shadow.querySelector('.check-button')
+        button.disabled = true
+      })
+      document.addEventListener('reset', (event) => {
+        const button = this.shadow.querySelector('.check-button')
+        button.disabled = false
+      })
       this.render()
     }
   
@@ -95,9 +103,9 @@ class CheckButton extends HTMLElement {
       </style>
       <div class="button-container">
         <div class="pokeball-button">
-          <img class="upper-half" src="img/pokeball-upper-part.svg">
+          <img class="upper-half" src="img/pokeball-upper-part.svg" draggable="false">
           <button class="check-button">Check</button>
-          <img class="lower-half" src="img/pokeball-lower-part.svg">
+          <img class="lower-half" src="img/pokeball-lower-part.svg" draggable="false">
         </div>
       </div>
       `

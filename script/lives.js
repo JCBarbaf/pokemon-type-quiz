@@ -3,6 +3,7 @@ class Lives extends HTMLElement {
     constructor () {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
+      this.lifeNumber = 3
     }
   
     connectedCallback () {
@@ -53,22 +54,25 @@ class Lives extends HTMLElement {
           }
         }
       </style>
-      <div class="lives">
-        <img class="life" src="img/pokeball.svg" alt="Life" ives="Life">
-        <img class="life" src="img/pokeball.svg" alt="Life" ives="Life">
-        <img class="life" src="img/pokeball.svg" alt="Life" ives="Life">
-      </div>
+      <div class="lives"></div>
       `
+      const livesContainer = this.shadow.querySelector('.lives')
+      for (let i = 0; i < this.lifeNumber; i++) {
+        let life = document.createElement('img')
+        life.classList.add('life')
+        life.src = 'img/pokeball.svg' 
+        life.alt = 'Life'
+        life.title = 'Life'
+        life.draggable = false
+        livesContainer.appendChild(life)
+      }
     }
     loseLife() {
       let lives = this.shadow.querySelectorAll('.life:not(.lost)')
       lives[lives.length-1].classList.add('lost')
       if (lives.length == 1) {
-        // console.log('sacabo')
         document.dispatchEvent(new CustomEvent('loose'))
       }
-      // console.log(lives)
-      // lives.pop()
     }
     resetLives() {
       let lives = this.shadow.querySelectorAll('.life')
