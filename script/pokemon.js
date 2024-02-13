@@ -145,6 +145,7 @@ class Pokemon extends HTMLElement {
       } else if (this.difficulty == 'normal') {
         if (typeOne == this.typeOne || typeTwo == this.typeOne) {
           if (typeOne == this.typeTwo || typeTwo == this.typeTwo) {
+            document.dispatchEvent(new CustomEvent('win'))
             this.showCrosssTick(true)
           } else {
             this.wrongAnswer()
