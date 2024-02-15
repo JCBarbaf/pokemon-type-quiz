@@ -106,6 +106,9 @@ class Type extends HTMLElement {
         .not-order {
           border-color: var(--yellow)
         }
+        .unselectable {
+          user-select: none;
+        }
       </style>
       <div class="type">
         <div class="type-container"></div>
@@ -133,7 +136,7 @@ class Type extends HTMLElement {
         } else {
           this.addClass('wrong')
         }
-      } else if (difficulty == 'difficult') {
+      } else if (difficulty == 'hard') {
         if ((typeOne == this.type && this.typeNumber == 1) || (typeTwo == this.type && this.typeNumber == 2)) {
           this.addClass('correct')
         } else {

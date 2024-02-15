@@ -8,7 +8,7 @@ class Pokemon extends HTMLElement {
       this.pokemonImage
       this.typeOne
       this.typeTwo
-      this.difficulty = 'difficult'
+      this.difficulty = 'normal'
       this.correctAnimationTime = 700
       this.wrongAnimationTime = 2000
       this.animationTime = this.correctAnimationTime
@@ -156,7 +156,7 @@ class Pokemon extends HTMLElement {
         } else {
           this.wrongAnswer()
         }
-      } else if (this.difficulty == 'difficult') {
+      } else if (this.difficulty == 'hard') {
         if (typeOne == this.typeOne) {
           if (typeTwo == this.typeTwo) {
             document.dispatchEvent(new CustomEvent('win'))
