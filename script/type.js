@@ -10,9 +10,12 @@ class Type extends HTMLElement {
     }
   
     connectedCallback () {
-      document.addEventListener('updateType', (event => {
+      document.addEventListener('updateType', (event) => {
         this.render()
-      }));
+      })
+      document.addEventListener('reset', (event) => {
+        this.forceWrong = false
+      })
       document.addEventListener('wrongAnswer', (event) => {
         if (this.typeNumber) {
           this.clue(event.detail.difficulty, event.detail.typeOne, event.detail.typeTwo)
@@ -20,7 +23,7 @@ class Type extends HTMLElement {
       })
       document.addEventListener('sameTypes', (event) => {
         if (this.typeNumber == 2) {
-          this.forceWrong= true
+          this.forceWrong = true
         }
       })
       document.addEventListener('revealTypes', (event) => {
@@ -131,7 +134,15 @@ class Type extends HTMLElement {
           this.addClass('wrong')
         }
       } else if (difficulty == 'difficult') {
-        
+        if ((typeOne == this.type && this.typeNumber == 1) || (typeTwo == this.type && this.typeNumber == 2)) {
+          this.addClass('correct')
+        } else {
+          if ((typeOne == this.type && this.typeNumber == 2) || (typeTwo == this.type && this.typeNumber == 1)) {
+            this.addClass('not-order')
+          } else {
+            this.addClass('wrong')
+          }
+        }
       }
       if (this.forceWrong) {
         this.addClass('wrong')

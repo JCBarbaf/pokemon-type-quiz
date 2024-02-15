@@ -8,7 +8,7 @@ class Pokemon extends HTMLElement {
       this.pokemonImage
       this.typeOne
       this.typeTwo
-      this.difficulty = 'normal'
+      this.difficulty = 'difficult'
       this.correctAnimationTime = 700
       this.wrongAnimationTime = 2000
       this.animationTime = this.correctAnimationTime
@@ -112,7 +112,7 @@ class Pokemon extends HTMLElement {
       `
     }
     loadInfo() {
-      // this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/sandslash','https://pokeapi.co/api/v2/pokemon/pupitar','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/mudkip','https://pokeapi.co/api/v2/pokemon/entei','https://pokeapi.co/api/v2/pokemon/bulbasaur']
+      // this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/heatran','https://pokeapi.co/api/v2/pokemon/pupitar','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/torterra','https://pokeapi.co/api/v2/pokemon/steelix','https://pokeapi.co/api/v2/pokemon/crustle','https://pokeapi.co/api/v2/pokemon/blaziken',,'https://pokeapi.co/api/v2/pokemon/scizor','https://pokeapi.co/api/v2/pokemon/swampert','https://pokeapi.co/api/v2/pokemon/typhlosion-hisui','https://pokeapi.co/api/v2/pokemon/mamoswine']
       let random = Math.floor(Math.random() * this.callList.length);
       // random = 1153
       let apiUrl = this.callList[random]
@@ -140,6 +140,9 @@ class Pokemon extends HTMLElement {
     }
     checkTypes(typeOne,typeTwo) {
       console.log(`selected types: type1: ${typeOne}, type2: ${typeTwo} -- real types: type1: ${this.typeOne}, type2: ${this.typeTwo}`)
+      if (typeOne == typeTwo) {
+        document.dispatchEvent(new CustomEvent('sameTypes'))
+      }
       if (this.difficulty == 'easy') {
         
       } else if (this.difficulty == 'normal') {
@@ -154,11 +157,18 @@ class Pokemon extends HTMLElement {
           this.wrongAnswer()
         }
       } else if (this.difficulty == 'difficult') {
-        
+        if (typeOne == this.typeOne) {
+          if (typeTwo == this.typeTwo) {
+            document.dispatchEvent(new CustomEvent('win'))
+            this.showCrosssTick(true)
+          } else {
+            this.wrongAnswer()
+          }
+        } else {
+          this.wrongAnswer()
+        }
       }
-      if (typeOne == typeTwo) {
-        document.dispatchEvent(new CustomEvent('sameTypes'))
-      }
+      
     }
     showCrosssTick(showTick) {
       const crossTick = this.shadow.querySelector('.cross-tick')
