@@ -62,8 +62,10 @@ class TypeContainer extends HTMLElement {
       })
       typeContainer.addEventListener('drop', (event) => {
         event.preventDefault()
-        typeContainer.classList.add('loaded')
-        this.typeHandler(event.dataTransfer.getData("type"))
+        if (event.dataTransfer.getData("type")) {
+          typeContainer.classList.add('loaded')
+          this.typeHandler(event.dataTransfer.getData("type"))
+        }
       })
       typeContainer.addEventListener('click', (event) => {
         if(event.target.closest('.remove-type')) {
