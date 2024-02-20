@@ -8,7 +8,7 @@ class Pokemon extends HTMLElement {
       this.pokemonImage
       this.typeOne
       this.typeTwo
-      this.difficulty = 'normal'
+      this.difficulty = 'easy'
       this.correctAnimationTime = 700
       this.wrongAnimationTime = 2000
       this.animationTime = this.correctAnimationTime
@@ -110,9 +110,14 @@ class Pokemon extends HTMLElement {
         </div>
       </div>
       `
+      if (this.difficulty == 'easy' && this.typeTwo == null) {
+        document.dispatchEvent(new CustomEvent('hideTypeTwo'))
+      }
+
     }
     loadInfo() {
-      // this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/heatran','https://pokeapi.co/api/v2/pokemon/pupitar','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/torterra','https://pokeapi.co/api/v2/pokemon/steelix','https://pokeapi.co/api/v2/pokemon/crustle','https://pokeapi.co/api/v2/pokemon/blaziken',,'https://pokeapi.co/api/v2/pokemon/scizor','https://pokeapi.co/api/v2/pokemon/swampert','https://pokeapi.co/api/v2/pokemon/typhlosion-hisui','https://pokeapi.co/api/v2/pokemon/mamoswine']
+      this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/heatran','https://pokeapi.co/api/v2/pokemon/pupitar','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/torterra','https://pokeapi.co/api/v2/pokemon/steelix','https://pokeapi.co/api/v2/pokemon/crustle','https://pokeapi.co/api/v2/pokemon/blaziken',,'https://pokeapi.co/api/v2/pokemon/scizor','https://pokeapi.co/api/v2/pokemon/swampert','https://pokeapi.co/api/v2/pokemon/typhlosion-hisui','https://pokeapi.co/api/v2/pokemon/mamoswine']
+      this.callList = ['https://pokeapi.co/api/v2/pokemon/mudkip','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/heatran','https://pokeapi.co/api/v2/pokemon/pansage','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/torterra']
       let random = Math.floor(Math.random() * this.callList.length);
       // random = 1153
       let apiUrl = this.callList[random]
@@ -143,9 +148,8 @@ class Pokemon extends HTMLElement {
       if (typeOne == typeTwo) {
         document.dispatchEvent(new CustomEvent('sameTypes'))
       }
-      if (this.difficulty == 'easy') {
-        
-      } else if (this.difficulty == 'normal') {
+      if (this.difficulty == 'normal' || this.difficulty == 'easy') {
+        console.log('hola')
         if (typeOne == this.typeOne || typeTwo == this.typeOne) {
           if (typeOne == this.typeTwo || typeTwo == this.typeTwo) {
             document.dispatchEvent(new CustomEvent('win'))

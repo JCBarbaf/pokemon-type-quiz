@@ -5,6 +5,7 @@ class CheckButton extends HTMLElement {
       this.shadow = this.attachShadow({ mode: 'open' })
       this.typeOne = null
       this.typeTwo = null
+      this.pokeball = 'pokeball'
     }
   
     connectedCallback () {
@@ -103,7 +104,7 @@ class CheckButton extends HTMLElement {
       </style>
       <div class="button-container">
         <div class="pokeball-button">
-          <img class="upper-half" src="img/pokeball-upper-part.svg" draggable="false">
+          <img class="upper-half" src="img/${this.pokeball}-upper-part.svg" draggable="false">
           <button class="check-button">Check</button>
           <img class="lower-half" src="img/pokeball-lower-part.svg" draggable="false">
         </div>
@@ -119,6 +120,43 @@ class CheckButton extends HTMLElement {
           }
         }))
       })
+      document.addEventListener('keydown', (event) => {
+        switch (event.key) {
+          case "1":
+            this.changePokeball('easy')
+            break;
+          case "2":
+            this.changePokeball('normal')
+            break;
+          case "3":
+            this.changePokeball('hard')
+            break;
+          case "4":
+            this.changePokeball('master')
+            break;        
+          default:
+            break;
+        }
+        this.render()
+      })
+    }
+    changePokeball(difficulty) {
+      switch (difficulty) {
+        case 'easy':
+          this.pokeball = "pokeball"
+          break;
+        case 'normal':
+          this.pokeball = "superball"
+          break;
+        case 'hard':
+          this.pokeball = "ultraball"
+          break;
+        case 'master':
+          this.pokeball = "masterball"
+          break;
+        default:
+          break;
+      }
     }
   }
   

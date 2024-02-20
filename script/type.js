@@ -130,7 +130,7 @@ class Type extends HTMLElement {
       })
     }
     clue(difficulty, typeOne, typeTwo) {
-      if (difficulty == 'normal') {
+      if (difficulty == 'normal' || difficulty == 'easy') {
         if (typeOne == this.type || typeTwo == this.type) {
           this.addClass('correct')
         } else {

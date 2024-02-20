@@ -1,5 +1,5 @@
-import './loadin-screen.js';
-import './call-handler.js';
+// import './loadin-screen.js';
+// import './call-handler.js';
 import './scores.js';
 import './background.js';
 import './title.js';

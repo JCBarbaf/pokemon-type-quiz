@@ -94,5 +94,53 @@ body {
 .best-score {
   color: gold;
 }
+.component {
+  --pokedex-color: rgb(255, 51, 52);
+  --border: 0.5rem solid rgb(180, 41, 42);
+  --background-color1: rgb(123, 176, 208);
+  --background-color2: rgb(113, 161, 189);
+  --button1-color: rgb(51, 218, 255);
+  --button2-color: rgb(251, 5, 5);
+  --button3-color: rgb(252, 255, 22);
+  --button4-color: rgb(105, 251, 34);
+  min-width: 30vw;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  background-color: blue;
+}
+.menu-container {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  display: flex;
+  justify-content: space-between;
+}
+.button-container {
+}
+.menu-button {
+  --size: 3rem;
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  background-color: rgb(224, 224, 224);
+  filter: brightness(0.8);
+  border: 0.3rem solid rgb(0,0,0,0.2);
+  border-radius: 50rem;
+}
+.menu-icon {
+  width: 1.5rem;
+  opacity: 0.2;
+}
+.menu {
+  width: 85%;
+  height: 100%;
+  background-color: red;
+}
 
 

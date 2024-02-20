@@ -3,12 +3,18 @@ class TypeContainer extends HTMLElement {
     constructor () {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
-      this.typeNumber = this.getAttribute('type-number');
+      this.typeNumber = this.getAttribute('type-number')
     }
   
     connectedCallback () {
       document.addEventListener('reset', () => {
         this.removeType()
+        this.hideTypeTwo(false)
+      })
+      document.addEventListener('hideTypeTwo', () => {
+        if (this.typeNumber == 2) {
+          this.hideTypeTwo(true)
+        }
       })
       this.render()
     }
@@ -17,6 +23,12 @@ class TypeContainer extends HTMLElement {
       this.shadow.innerHTML =
       /*html*/`
       <style>
+        :host {
+          min-height: 28vh
+        }
+        .type-container.hidden {
+          display: none;
+        }
         .type-title {
           margin: auto;
           text-align: center;
@@ -86,6 +98,14 @@ class TypeContainer extends HTMLElement {
       const typeContainer = this.shadow.querySelector('.type-container')
       typeContainer.classList.remove('loaded')
       this.typeHandler(null)
+    }
+    hideTypeTwo(hide) {
+      const typeContainer = this.shadow.querySelector('.type-container')
+      if (hide) {
+        typeContainer.classList.add('hidden')
+      } else {
+        typeContainer.classList.remove('hidden')
+      }
     }
   }
   
