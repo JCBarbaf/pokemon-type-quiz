@@ -94,6 +94,10 @@ body {
 .best-score {
   color: gold;
 }
+
+
+
+
 .component {
   --pokedex-color: rgb(255, 51, 52);
   --border: 0.5rem solid rgb(180, 41, 42);
@@ -103,7 +107,7 @@ body {
   --button2-color: rgb(251, 5, 5);
   --button3-color: rgb(252, 255, 22);
   --button4-color: rgb(105, 251, 34);
-  min-width: 30vw;
+  width: 40rem;
   position: fixed;
   right: 0;
   top: 0;
@@ -118,10 +122,8 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.button-container {
-}
 .menu-button {
-  --size: 3rem;
+  --size: 3.5rem;
   width: var(--size);
   height: var(--size);
   display: flex;
@@ -139,8 +141,80 @@ body {
 }
 .menu {
   width: 85%;
-  height: 100%;
-  background-color: red;
+  height: 98%;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: auto 0;
+  background-color: var(--pokedex-color);
+  border: var(--border);
+  border-right: none;
+  border-radius: 2rem 0 0 2rem;
+}
+.pokedex-header {
+  width: 100%;
+  position: absolute;
+  top: 1.35rem;
+  left: 1.55rem;
+  display: flex;
+}
+.pokedex-buttons {
+  box-sizing: border-box;
+  width: 50%;
+  display: flex;
+  background-color: var(--pokedex-color);
+  border-bottom: var(--border);
+  border-right: var(--border);
+  border-radius: 1rem 0;
+}
+.button {
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--button1-color);
+  border: var(--border);
+  border-width: 0.3rem;
+  border-radius: 20rem;
+}
+.big.button {
+  --size: 5rem;
+  margin: 5%;
+}
+.small-buttons {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 5%;
+  margin-top: 5%;
+}
+.small.button {
+  --size: 1.5rem;
+  &:nth-of-type(1) {
+    background-color: var(--button2-color);
+  }
+  &:nth-of-type(2) {
+    background-color: var(--button3-color);
+  }
+  &:nth-of-type(3) {
+    background-color: var(--button4-color);
+  }
+}
+.menu-content {
+  width: 95%;
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  padding: 1%;
+  padding-top: 7rem;
+  background: repeating-linear-gradient(var(--background-color1) 0%, var(--background-color1) 3%, var(--background-color2) 4%, var(--background-color2) 6%, var(--background-color1) 7%);
+  border: var(--border);
+  border-right: none;
+  border-radius: 1rem 0 0 1rem;
+}
+.difficulty-container {
+  background-color: blue;
+  width: 90%;
 }
 
 
