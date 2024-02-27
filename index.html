@@ -37,16 +37,30 @@
           <main class="menu-content">
             <div class="difficulty-container">
               <div class="difficulty">
-                <button class="easy" data-difficulty="easy">Easy</button>
-                <button class="normal" data-difficulty="normal">Normal</button>
-                <button class="hard" data-difficulty="hard">Hard</button>
+                <button class="difficulty-button easy" data-difficulty="easy">Easy</button>
+                <button class="difficulty-button normal selected" data-difficulty="normal">Normal</button>
+                <button class="difficulty-button hard" data-difficulty="hard">Hard</button>
               </div>
               <div class="explanations">
-                <p class="easy">On easy mode, if a Pokémon has only one type, only one type container will be shown.</p>
-                <p class="normal">On normal mode, if a Pokémon has only one type, you have to leave the second type container empty.</p>
-                <p class="hard">On hard mode, you have to guess the types in the correct order.</p>
+                <p class="explanation easy">On easy mode, if a Pokémon has only one type, only one type container will be shown.</p>
+                <p class="explanation normal">On normal mode, if a Pokémon has only one type, you have to leave the second type container empty.</p>
+                <p class="explanation hard">On hard mode, you have to guess the types in the correct order.</p>
               </div>
             </div>
+            <div class="live-selector">
+              <p>Lifes:</p>
+              <button class="lifes-button down">-</button>
+              <input type="number" value="0" readonly>
+              <button class="lifes-button up">+</button>
+            </div>
+            <button class="menu-item">
+              <svg class="menu-item-icon achivements-icon" viewBox="0 0 317 313" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M259.269 55.5268C262.785 31.3123 263.932 12.2071 261.368 8.06457C254.868 -2.43695 60.8683 -2.93654 55.368 8.06461C53.204 12.3929 54.4226 31.4515 57.8734 55.5549C36.4588 53.9491 13.9695 58.8915 4.86823 71.563C-10.2744 92.6459 12.7153 141.794 35.3681 158.064C49.9808 168.559 73.9773 180.945 93.2353 182.755C105.984 205.539 121.003 221.232 137 228.66V255.232C121.588 257.703 107.36 262.854 95.9454 270.247C79.4524 280.93 64.6368 307.873 70.1867 310.526C75.7365 313.179 241.382 313.305 246.078 310.526C250.775 307.747 236.813 280.93 220.32 270.247C208.84 262.812 194.514 257.644 179 255.19V228.995C195.272 221.711 210.556 205.889 223.499 182.758C242.761 180.955 266.771 168.564 281.39 158.064C304.043 141.794 327.032 92.6459 311.89 71.563C302.843 58.9674 280.568 54.0086 259.269 55.5268ZM238.13 149.493C244.161 131.384 249.701 108.519 253.992 86.4461C266.162 83.9484 278.896 84.6113 283.889 91.563C292.315 103.294 279.994 123.01 267.389 132.063C260.037 137.344 248.304 145.741 238.13 149.493ZM78.6401 149.498C72.6662 131.395 67.2527 108.557 63.0552 86.5062C50.7981 83.9383 37.9012 84.556 32.8685 91.563C24.4426 103.294 36.7637 123.01 49.3685 132.063C56.724 137.346 68.4635 145.748 78.6401 149.498Z" fill="#D9D9D9"/>
+              </svg>
+              Achievements
+            </button>
+            <button class="menu-item">Disclaimer</button>
+            <a class="menu-item" href="">Buy me a coffe</a>
           </main>
         </div>
       </div>
