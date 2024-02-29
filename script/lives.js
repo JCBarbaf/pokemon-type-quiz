@@ -3,7 +3,8 @@ class Lives extends HTMLElement {
     constructor () {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
-      this.lifeNumber = 3
+      this.maxLifes = 3
+      this.lifes = this.maxLifes
     }
   
     connectedCallback () {
@@ -12,6 +13,12 @@ class Lives extends HTMLElement {
       })
       document.addEventListener('reset', (event) => {
         this.resetLives()
+      })
+      document.addEventListener('changeLifes', (event) => {
+        if (this.lifes = this.maxLifes) {
+          this.maxLifes = event.detail.lifes
+          this.render()
+        }
       })
       this.render()
     }
@@ -22,6 +29,7 @@ class Lives extends HTMLElement {
       <style>
         :host {
           flex: 1;
+          background-color: red;
         }
         .lives {
           height: 100%;
@@ -57,7 +65,7 @@ class Lives extends HTMLElement {
       <div class="lives"></div>
       `
       const livesContainer = this.shadow.querySelector('.lives')
-      for (let i = 0; i < this.lifeNumber; i++) {
+      for (let i = 0; i < this.maxLifes; i++) {
         let life = document.createElement('img')
         life.classList.add('life')
         life.src = 'img/pokeball.svg' 
@@ -68,6 +76,7 @@ class Lives extends HTMLElement {
       }
     }
     loseLife() {
+      this.lifes--
       let lives = this.shadow.querySelectorAll('.life:not(.lost)')
       lives[lives.length-1].classList.add('lost')
       if (lives.length == 1) {

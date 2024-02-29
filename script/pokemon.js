@@ -32,6 +32,10 @@ class Pokemon extends HTMLElement {
         this.animationTime = this.wrongAnimationTime
         this.showCrosssTick(false)
       })
+      document.addEventListener('changeDifficulty', (event) => {
+        this.difficulty = event.detail.difficulty
+        console.log(this.difficulty)
+      })
       this.render()
     }
   

@@ -3,6 +3,9 @@ class Menu extends HTMLElement {
     constructor () {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
+      this.difficulty = 'normal'
+      this.lifes = 3
+      this.maxlifes = 5
     }
   
     connectedCallback () {
@@ -308,7 +311,7 @@ class Menu extends HTMLElement {
             <div class="live-selector">
               <p>Lifes:</p>
               <button class="lifes-button down">-</button>
-              <p class="life-display">3</p>
+              <p class="life-display">${this.lifes}</p>
               <button class="lifes-button up">+</button>
             </div>
             <button class="menu-item">
@@ -323,6 +326,36 @@ class Menu extends HTMLElement {
         </div>
       </div>
       `
+      const menuContainer = this.shadow.querySelector('.menu-container')
+      menuContainer.addEventListener('click', (event) => {
+        if (event.target.closest('.lifes-button')) {
+          if (event.target.closest('.down')) {
+            if (this.lifes > 1) {
+              this.lifes--
+            }
+          } else if (event.target.closest('.up')) {
+            if(this.lifes < this.maxlifes) {
+              this.lifes++
+            }
+          }
+          this.render()
+          document.dispatchEvent(new CustomEvent('changeLifes', {
+            detail: {
+              lifes: this.lifes
+            }
+          }))
+        }
+        if (event.target.closest('.difficulty-button')) {
+          event.target.parentNode.querySelector('.selected').classList.remove('selected')
+          event.target.classList.add('selected')
+          this.difficulty = event.target.dataset.difficulty
+          document.dispatchEvent(new CustomEvent('changeDifficulty', {
+            detail: {
+              difficulty: this.difficulty
+            }
+          }))
+        }
+      })
     }
   }
   
