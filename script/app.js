@@ -8,3 +8,4 @@ import './type-container.js';
 import './type.js';
 import './check-button.js';
 import './lives.js';
+import './menu.js';
