@@ -29,11 +29,14 @@ class Lives extends HTMLElement {
       <style>
         :host {
           flex: 1;
-          background-color: red;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         .lives {
-          height: 100%;
+          width: 50%;
           display: flex;
+          flex-wrap: wrap;
           justify-content: center;
           align-items: center;
           gap: 5%;
@@ -42,6 +45,7 @@ class Lives extends HTMLElement {
           --size: 2rem;
           width: var(--size);
           height: var(--size);
+          margin-bottom: 5%;
         }
         .life.lost {
           animation: disappear 1s ease-out forwards;

@@ -4,11 +4,13 @@ class Pokemon extends HTMLElement {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
       this.callList
+      this.numberHistory = []
+      this.maxHistory = 100
       this.pokemonName
       this.pokemonImage
       this.typeOne
       this.typeTwo
-      this.difficulty = 'easy'
+      this.difficulty = 'normal'
       this.correctAnimationTime = 700
       this.wrongAnimationTime = 2000
       this.animationTime = this.correctAnimationTime
@@ -33,8 +35,9 @@ class Pokemon extends HTMLElement {
         this.showCrosssTick(false)
       })
       document.addEventListener('changeDifficulty', (event) => {
-        this.difficulty = event.detail.difficulty
-        console.log(this.difficulty)
+        if (event.detail.difficulty != 'master') {
+          this.difficulty = event.detail.difficulty
+        }
       })
       this.render()
     }
@@ -120,9 +123,16 @@ class Pokemon extends HTMLElement {
 
     }
     loadInfo() {
-      this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/heatran','https://pokeapi.co/api/v2/pokemon/pupitar','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/torterra','https://pokeapi.co/api/v2/pokemon/steelix','https://pokeapi.co/api/v2/pokemon/crustle','https://pokeapi.co/api/v2/pokemon/blaziken',,'https://pokeapi.co/api/v2/pokemon/scizor','https://pokeapi.co/api/v2/pokemon/swampert','https://pokeapi.co/api/v2/pokemon/typhlosion-hisui','https://pokeapi.co/api/v2/pokemon/mamoswine']
-      this.callList = ['https://pokeapi.co/api/v2/pokemon/mudkip','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/heatran','https://pokeapi.co/api/v2/pokemon/pansage','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/torterra']
-      let random = Math.floor(Math.random() * this.callList.length);
+      this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/heatran','https://pokeapi.co/api/v2/pokemon/pupitar','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/torterra','https://pokeapi.co/api/v2/pokemon/chimchar','https://pokeapi.co/api/v2/pokemon/crustle','https://pokeapi.co/api/v2/pokemon/blaziken','https://pokeapi.co/api/v2/pokemon/scizor','https://pokeapi.co/api/v2/pokemon/swampert','https://pokeapi.co/api/v2/pokemon/typhlosion-hisui','https://pokeapi.co/api/v2/pokemon/mamoswine']
+      this.maxHistory = 10
+      let random
+      do {
+        random = Math.floor(Math.random() * this.callList.length);
+      } while (this.numberHistory.indexOf(random) != -1);
+      this.numberHistory.push(random)
+      if (this.numberHistory.length >= this.maxHistory) {
+        this.numberHistory = []
+      }
       // random = 1153
       let apiUrl = this.callList[random]
       fetch(apiUrl)

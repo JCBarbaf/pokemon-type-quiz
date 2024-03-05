@@ -5,7 +5,7 @@ class Menu extends HTMLElement {
       this.shadow = this.attachShadow({ mode: 'open' })
       this.difficulty = 'normal'
       this.lifes = 3
-      this.maxlifes = 5
+      this.maxlifes = 6
     }
   
     connectedCallback () {
@@ -27,13 +27,15 @@ class Menu extends HTMLElement {
           --pokedex-btn4-color: rgb(105, 251, 34);
           --button-color: rgb(179, 179, 179);
           --explanation-bc: rgb(122, 122, 122);
-          --border: 0.2rem solid rgb(0,0,0,0.2);;
+          --border: 0.2rem solid rgb(0,0,0,0.2);
+          --transition: 0.5s ease-in;
           width: 40rem;
           position: fixed;
           right: 0;
           top: 0;
           bottom: 0;
           overflow-x: hidden;
+          pointer-events: none;
           z-index: 300;
         }
         * {
@@ -47,6 +49,16 @@ class Menu extends HTMLElement {
           height: 100%;
           display: flex;
           justify-content: space-between;
+          position: absolute;
+          right: -85%;
+          /*transform: translateX(85%);*/
+          transition: var(--transition);
+          transition-property: right;
+          pointer-events: all;
+        }
+        .menu-container.active {
+          right: 0;
+          /*transform: translateX(0);*/
         }
         .menu-button {
           --size: 3.5rem;
@@ -60,10 +72,20 @@ class Menu extends HTMLElement {
           border: var(--border);
           border-radius: 50rem;
           box-shadow: 0.2rem 0.2rem 0 0 rgb(0,0,0,0.2);
+          cursor: pointer;
+        }
+        .menu-button:hover {
+          filter: brightness(1.1)
         }
         .menu-icon {
           width: 1.5rem;
           opacity: 0.2;
+          transform: rotate(0deg);
+          transition: var(--transition);
+          transition-property: transform;
+        }
+        .active .menu-icon {
+          transform: rotate(-180deg);
         }
         .menu {
           width: 85%;
@@ -299,7 +321,7 @@ class Menu extends HTMLElement {
             <div class="difficulty-container">
               <div class="difficulty">
                 <button class="difficulty-button easy" data-difficulty="easy">Easy</button>
-                <button class="difficulty-button normal selected" data-difficulty="normal">Normal</button>
+                <button class="difficulty-button normal" data-difficulty="normal">Normal</button>
                 <button class="difficulty-button hard" data-difficulty="hard">Hard</button>
               </div>
               <div class="explanations">
@@ -326,8 +348,12 @@ class Menu extends HTMLElement {
         </div>
       </div>
       `
+      this.shadow.querySelector(`.difficulty-button.${this.difficulty}`).classList.add('selected')
       const menuContainer = this.shadow.querySelector('.menu-container')
       menuContainer.addEventListener('click', (event) => {
+        if (event.target.closest('.menu-button')) {
+          menuContainer.classList.toggle('active')
+        }
         if (event.target.closest('.lifes-button')) {
           if (event.target.closest('.down')) {
             if (this.lifes > 1) {
@@ -338,7 +364,7 @@ class Menu extends HTMLElement {
               this.lifes++
             }
           }
-          this.render()
+          this.shadow.querySelector('.life-display').innerHTML = this.lifes
           document.dispatchEvent(new CustomEvent('changeLifes', {
             detail: {
               lifes: this.lifes
@@ -349,6 +375,19 @@ class Menu extends HTMLElement {
           event.target.parentNode.querySelector('.selected').classList.remove('selected')
           event.target.classList.add('selected')
           this.difficulty = event.target.dataset.difficulty
+          document.dispatchEvent(new CustomEvent('changeDifficulty', {
+            detail: {
+              difficulty: this.difficulty
+            }
+          }))
+        }
+        if (this.difficulty == 'hard' && this.lifes == 1) {
+          document.dispatchEvent(new CustomEvent('changeDifficulty', {
+            detail: {
+              difficulty: 'master'
+            }
+          }))
+        } else {
           document.dispatchEvent(new CustomEvent('changeDifficulty', {
             detail: {
               difficulty: this.difficulty

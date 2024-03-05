@@ -5,7 +5,7 @@ class CheckButton extends HTMLElement {
       this.shadow = this.attachShadow({ mode: 'open' })
       this.typeOne = null
       this.typeTwo = null
-      this.pokeball = 'pokeball'
+      this.pokeball = 'superball'
     }
   
     connectedCallback () {
@@ -23,6 +23,9 @@ class CheckButton extends HTMLElement {
       document.addEventListener('reset', (event) => {
         const button = this.shadow.querySelector('.check-button')
         button.disabled = false
+      })
+      document.addEventListener('changeDifficulty', (event) => {
+        this.changePokeball(event.detail.difficulty)
       })
       this.render()
     }
@@ -52,6 +55,7 @@ class CheckButton extends HTMLElement {
           transform: scale(1.05);
         }
         .pokeball-button:has(:disabled) {
+          pointer-events: none;
           animation: var(--animation-details);
           animation-name: button-rotate;
         }
@@ -110,7 +114,7 @@ class CheckButton extends HTMLElement {
         </div>
       </div>
       `
-      const button = this.shadow.querySelector('.check-button')
+      const button = this.shadow.querySelector('.pokeball-button')
       button.addEventListener('click', ()=> {
         // button.disabled = true;
         document.dispatchEvent(new CustomEvent('checkTypes', {
@@ -119,25 +123,6 @@ class CheckButton extends HTMLElement {
             typeTwo: this.typeTwo,
           }
         }))
-      })
-      document.addEventListener('keydown', (event) => {
-        switch (event.key) {
-          case "1":
-            this.changePokeball('easy')
-            break;
-          case "2":
-            this.changePokeball('normal')
-            break;
-          case "3":
-            this.changePokeball('hard')
-            break;
-          case "4":
-            this.changePokeball('master')
-            break;        
-          default:
-            break;
-        }
-        this.render()
       })
     }
     changePokeball(difficulty) {
@@ -157,6 +142,7 @@ class CheckButton extends HTMLElement {
         default:
           break;
       }
+      this.render()
     }
   }
   
