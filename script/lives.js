@@ -12,11 +12,13 @@ class Lives extends HTMLElement {
         this.loseLife()
       })
       document.addEventListener('reset', (event) => {
+        this.lifes = this.maxLifes
         this.resetLives()
       })
       document.addEventListener('changeLifes', (event) => {
-        if (this.lifes = this.maxLifes) {
+        if (this.lifes == this.maxLifes) {
           this.maxLifes = event.detail.lifes
+          this.lifes = this.maxLifes
           this.render()
         }
       })
