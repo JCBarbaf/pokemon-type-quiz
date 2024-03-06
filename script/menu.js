@@ -380,6 +380,7 @@ class Menu extends HTMLElement {
               difficulty: this.difficulty
             }
           }))
+          document.dispatchEvent(new CustomEvent('loose'))
         }
         if (this.difficulty == 'hard' && this.lifes == 1) {
           document.dispatchEvent(new CustomEvent('changeDifficulty', {
