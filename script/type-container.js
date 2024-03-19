@@ -74,9 +74,18 @@ class TypeContainer extends HTMLElement {
       })
       typeContainer.addEventListener('drop', (event) => {
         event.preventDefault()
-        if (event.dataTransfer.getData("type") && event.dataTransfer.getData("type") != 'null') {
+        if (event.dataTransfer.getData("application/json") && event.dataTransfer.getData("application/json") != 'null') {
+          const dataObject = JSON.parse(event.dataTransfer.getData("application/json"));
           typeContainer.classList.add('loaded')
-          this.typeHandler(event.dataTransfer.getData("type"))
+          if (dataObject.typeNumber) {
+            document.dispatchEvent(new CustomEvent('swapTypes', {
+              detail: {
+                type: this.shadow.querySelector('type-component').type,
+                typeNumber : dataObject.typeNumber
+              }
+            }))
+          }
+          this.typeHandler(dataObject.type)
         }
       })
       typeContainer.addEventListener('click', (event) => {

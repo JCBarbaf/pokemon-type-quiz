@@ -6,6 +6,7 @@ class Menu extends HTMLElement {
       this.difficulty = 'normal'
       this.lifes = 3
       this.maxlifes = 6
+      this.hasChanges = false
     }
   
     connectedCallback () {
@@ -44,6 +45,22 @@ class Menu extends HTMLElement {
             padding: 0;
             color: inherit;
         }
+        .blocker {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          opacity: 0;
+          background-color: rgb(0,0,0,0.5);
+          pointer-events: none;
+          transition: opacity 0.1s ease-in;
+          z-index: 100;
+        }
+        .menu-container.active .blocker {
+          opacity: 1;
+          pointer-events: all;
+        }
         .menu-container {
           width: 100%;
           height: 100%;
@@ -51,14 +68,15 @@ class Menu extends HTMLElement {
           justify-content: space-between;
           position: absolute;
           right: -85%;
-          /*transform: translateX(85%);*/
           transition: var(--transition);
           transition-property: right;
           pointer-events: all;
         }
         .menu-container.active {
           right: 0;
-          /*transform: translateX(0);*/
+        }
+        .button-container {
+          z-index: 200;
         }
         .menu-button {
           --size: 3.5rem;
@@ -100,6 +118,11 @@ class Menu extends HTMLElement {
           border-right: none;
           border-radius: 2rem 0 0 2rem;
           box-shadow: 0.5rem 0.5rem 0 0 rgb(0,0,0,0.2);
+          z-index: 200;
+        }
+        .menu.blocked {
+          filter: brightness(0.9);
+          pointer-events: none;
         }
         .pokedex-header {
           width: 100%;
@@ -299,6 +322,7 @@ class Menu extends HTMLElement {
         }
       </style>
       <div class="menu-container">
+      <div class="blocker"></div>
         <div class="button-container">
           <button class="menu-button">
             <svg class="menu-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -352,6 +376,10 @@ class Menu extends HTMLElement {
       const menuContainer = this.shadow.querySelector('.menu-container')
       menuContainer.addEventListener('click', (event) => {
         if (event.target.closest('.menu-button')) {
+          if (menuContainer.classList.contains('active') && this.hasChanges) {
+            document.dispatchEvent(new CustomEvent('loose'))
+            this.hasChanges = false
+          }
           menuContainer.classList.toggle('active')
         }
         if (event.target.closest('.lifes-button')) {
@@ -370,6 +398,7 @@ class Menu extends HTMLElement {
               lifes: this.lifes
             }
           }))
+          this.hasChanges = true
         }
         if (event.target.closest('.difficulty-button')) {
           event.target.parentNode.querySelector('.selected').classList.remove('selected')
@@ -380,7 +409,7 @@ class Menu extends HTMLElement {
               difficulty: this.difficulty
             }
           }))
-          document.dispatchEvent(new CustomEvent('loose'))
+          this.hasChanges = true
         }
         if (this.difficulty == 'hard' && this.lifes == 1) {
           document.dispatchEvent(new CustomEvent('changeDifficulty', {

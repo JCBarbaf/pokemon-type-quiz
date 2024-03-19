@@ -16,14 +16,27 @@ class Type extends HTMLElement {
       document.addEventListener('reset', (event) => {
         this.forceWrong = false
       })
+      document.addEventListener('swapTypes', (event) => {
+        if (this.typeNumber == event.detail.typeNumber) {
+          this.type = event.detail.type
+          this.render()
+        }
+      })
       document.addEventListener('wrongAnswer', (event) => {
         if (this.typeNumber) {
           this.clue(event.detail.difficulty, event.detail.typeOne, event.detail.typeTwo)
+          this.forceWrong = false
         }
       })
       document.addEventListener('sameTypes', (event) => {
-        if (this.typeNumber == 2) {
-          this.forceWrong = true
+        if (event.detail.type == null) {
+          if (this.typeNumber == 1) {
+            this.forceWrong = true
+          }
+        } else {
+          if (this.typeNumber == 2) {
+            this.forceWrong = true
+          }
         }
       })
       document.addEventListener('revealTypes', (event) => {
@@ -126,7 +139,11 @@ class Type extends HTMLElement {
         typeContainer.appendChild(typeIcon)
       }
       typeContainer.addEventListener('dragstart', (event) => {
-        event.dataTransfer.setData("type", this.type);
+        const dataObject = {
+          type: this.type,
+          typeNumber: this.typeNumber
+        };
+        event.dataTransfer.setData("application/json", JSON.stringify(dataObject));
       })
     }
     clue(difficulty, typeOne, typeTwo) {
