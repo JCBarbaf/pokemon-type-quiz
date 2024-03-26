@@ -14,7 +14,7 @@ class Scores extends HTMLElement {
       document.addEventListener('win', (event) => {
         this.addPoint()
       })
-      document.addEventListener('loose', (event) => {
+      document.addEventListener('lose', (event) => {
         this.resetPoints()
       })
       this.render()

@@ -49,7 +49,7 @@ body {
   justify-content: space-between;
 }
 
-.button-lives {
+.button-lifes {
   display: flex;
   justify-content: space-between;
 }
@@ -95,3 +95,11 @@ body {
 .best-score {
   color: gold;
 }
+/* @media screen and (max-width: 1024px) {
+  .quiz-container {
+    width: 100%;
+  }
+  .types-gallery {
+    width: 100%;
+  }
+} */

@@ -9,6 +9,7 @@ class CheckButton extends HTMLElement {
     }
   
     connectedCallback () {
+      this.render()
       document.addEventListener('updateType', (event) => {
         if (event.detail.typeNumber == 1) {
           this.typeOne = event.detail.type
@@ -16,18 +17,25 @@ class CheckButton extends HTMLElement {
           this.typeTwo = event.detail.type
         }
       })
-      document.addEventListener('loose', (event) => {
+      document.addEventListener('lose', (event) => {
         const button = this.shadow.querySelector('.check-button')
+        button.classList.add('stopped')
         button.disabled = true
+        console.log(button)
+      })
+      document.addEventListener('win', (event) => {
+        const button = this.shadow.querySelector('.check-button')
+        button.classList.add('stopped')
+        // button.disabled = true
       })
       document.addEventListener('reset', (event) => {
         const button = this.shadow.querySelector('.check-button')
+        button.classList.remove('stopped')
         button.disabled = false
       })
       document.addEventListener('changeDifficulty', (event) => {
         this.changePokeball(event.detail.difficulty)
       })
-      this.render()
     }
   
     render () {
@@ -37,6 +45,14 @@ class CheckButton extends HTMLElement {
         :host {
           --button-size: 15rem;
           --animation-details: 1s ease-in-out forwards;
+        }
+        * {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none; 
+          user-select: none;
         }
         .button-container {
           width: 25rem;
@@ -55,9 +71,11 @@ class CheckButton extends HTMLElement {
           transform: scale(1.05);
         }
         .pokeball-button:has(:disabled) {
-          pointer-events: none;
           animation: var(--animation-details);
           animation-name: button-rotate;
+        }
+        .pokeball-button:has( .stopped) {
+          pointer-events: none;
         }
         .check-button {
           width: var(--button-size);

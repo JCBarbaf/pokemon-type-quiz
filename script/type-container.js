@@ -16,6 +16,11 @@ class TypeContainer extends HTMLElement {
           this.hideTypeTwo(true)
         }
       })
+      document.addEventListener('swapTypes', (event) => {
+        if (this.typeNumber == event.detail.typeNumber) {
+          this.typeHandler(event.detail.type)
+        }
+      })
       this.render()
     }
   

@@ -7,6 +7,8 @@ class Menu extends HTMLElement {
       this.lifes = 3
       this.maxlifes = 6
       this.hasChanges = false
+      this.oldDifficulty = this.difficulty
+      this.oldLifes = this.lifes
     }
   
     connectedCallback () {
@@ -376,9 +378,13 @@ class Menu extends HTMLElement {
       const menuContainer = this.shadow.querySelector('.menu-container')
       menuContainer.addEventListener('click', (event) => {
         if (event.target.closest('.menu-button')) {
-          if (menuContainer.classList.contains('active') && this.hasChanges) {
-            document.dispatchEvent(new CustomEvent('loose'))
-            this.hasChanges = false
+          if (menuContainer.classList.contains('active')) {
+            if (this.oldDifficulty != this.difficulty || this.oldLifes != this.lifes) {
+              this.oldDifficulty = this.difficulty
+              this.oldLifes = this.lifes
+              document.dispatchEvent(new CustomEvent('lose'))
+              this.hasChanges = false
+            }
           }
           menuContainer.classList.toggle('active')
         }

@@ -1,4 +1,4 @@
-class Lives extends HTMLElement {
+class Lifes extends HTMLElement {
 
     constructor () {
       super()
@@ -13,7 +13,7 @@ class Lives extends HTMLElement {
       })
       document.addEventListener('reset', (event) => {
         this.lifes = this.maxLifes
-        this.resetLives()
+        this.resetLifes()
       })
       document.addEventListener('changeLifes', (event) => {
         if (this.lifes == this.maxLifes) {
@@ -35,7 +35,7 @@ class Lives extends HTMLElement {
           justify-content: center;
           align-items: center;
         }
-        .lives {
+        .lifes {
           width: 50%;
           display: flex;
           flex-wrap: wrap;
@@ -68,9 +68,9 @@ class Lives extends HTMLElement {
           }
         }
       </style>
-      <div class="lives"></div>
+      <div class="lifes"></div>
       `
-      const livesContainer = this.shadow.querySelector('.lives')
+      const lifesContainer = this.shadow.querySelector('.lifes')
       for (let i = 0; i < this.maxLifes; i++) {
         let life = document.createElement('img')
         life.classList.add('life')
@@ -78,23 +78,23 @@ class Lives extends HTMLElement {
         life.alt = 'Life'
         life.title = 'Life'
         life.draggable = false
-        livesContainer.appendChild(life)
+        lifesContainer.appendChild(life)
       }
     }
     loseLife() {
       this.lifes--
-      let lives = this.shadow.querySelectorAll('.life:not(.lost)')
-      lives[lives.length-1].classList.add('lost')
-      if (lives.length == 1) {
-        document.dispatchEvent(new CustomEvent('loose'))
+      let lifes = this.shadow.querySelectorAll('.life:not(.lost)')
+      lifes[lifes.length-1].classList.add('lost')
+      if (lifes.length == 1) {
+        document.dispatchEvent(new CustomEvent('lose'))
       }
     }
-    resetLives() {
-      let lives = this.shadow.querySelectorAll('.life')
-      lives.forEach((life) => {
+    resetLifes() {
+      let lifes = this.shadow.querySelectorAll('.life')
+      lifes.forEach((life) => {
         life.classList.remove('lost')
       })
     }
   }
   
-  customElements.define('lives-component', Lives);
+  customElements.define('lifes-component', Lifes);

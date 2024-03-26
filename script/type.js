@@ -16,12 +16,6 @@ class Type extends HTMLElement {
       document.addEventListener('reset', (event) => {
         this.forceWrong = false
       })
-      document.addEventListener('swapTypes', (event) => {
-        if (this.typeNumber == event.detail.typeNumber) {
-          this.type = event.detail.type
-          this.render()
-        }
-      })
       document.addEventListener('wrongAnswer', (event) => {
         if (this.typeNumber) {
           this.clue(event.detail.difficulty, event.detail.typeOne, event.detail.typeTwo)
