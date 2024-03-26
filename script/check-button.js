@@ -160,7 +160,9 @@ class CheckButton extends HTMLElement {
         default:
           break;
       }
-      this.render()
+      const upperHalf = this.shadow.querySelector('.upper-half')
+      upperHalf.src = `img/${this.pokeball}-upper-part.svg`
+      // this.render()
     }
   }
   

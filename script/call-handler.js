@@ -10,7 +10,7 @@ export default (async () => {
     }
     
     const data = await response.json()
-    let results = data.results 
+    let results = data.results  
     
     var apiCalls = await Promise.all(
       results.map( async (result, index) => {
