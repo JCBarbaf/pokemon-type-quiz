@@ -9,3 +9,4 @@ import './type.js';
 import './check-button.js';
 import './lifes.js';
 import './menu.js';
+import './modal-disclaimer.js';

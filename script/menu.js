@@ -368,7 +368,7 @@ class Menu extends HTMLElement {
               </svg>
               Achievements
             </button>
-            <button class="menu-item">Disclaimer</button>
+            <button class="menu-item disclaimer">Disclaimer</button>
             <a class="menu-item" href="">Buy me a coffe</a>
           </main>
         </div>
@@ -416,6 +416,9 @@ class Menu extends HTMLElement {
             }
           }))
           this.hasChanges = true
+        }
+        if (event.target.closest('.disclaimer')) {
+          document.dispatchEvent(new CustomEvent('openDisclaimer'))
         }
         if (this.difficulty == 'hard' && this.lifes == 1) {
           document.dispatchEvent(new CustomEvent('changeDifficulty', {
