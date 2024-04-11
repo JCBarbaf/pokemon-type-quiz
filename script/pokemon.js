@@ -123,8 +123,6 @@ class Pokemon extends HTMLElement {
 
     }
     loadInfo() {
-      this.callList = ['https://pokeapi.co/api/v2/pokemon/gengar','https://pokeapi.co/api/v2/pokemon/ditto','https://pokeapi.co/api/v2/pokemon/heatran','https://pokeapi.co/api/v2/pokemon/pupitar','https://pokeapi.co/api/v2/pokemon/scyther','https://pokeapi.co/api/v2/pokemon/torterra','https://pokeapi.co/api/v2/pokemon/chimchar','https://pokeapi.co/api/v2/pokemon/crustle','https://pokeapi.co/api/v2/pokemon/blaziken','https://pokeapi.co/api/v2/pokemon/scizor','https://pokeapi.co/api/v2/pokemon/swampert','https://pokeapi.co/api/v2/pokemon/typhlosion-hisui','https://pokeapi.co/api/v2/pokemon/mamoswine','https://pokeapi.co/api/v2/pokemon/piplup','https://pokeapi.co/api/v2/pokemon/ponyta','https://pokeapi.co/api/v2/pokemon/arceus','https://pokeapi.co/api/v2/pokemon/kyogre']
-      this.maxHistory = 10
       let random
       do {
         random = Math.floor(Math.random() * this.callList.length);
@@ -158,7 +156,6 @@ class Pokemon extends HTMLElement {
       });
     }
     checkTypes(typeOne,typeTwo) {
-      // console.log(`selected types: type1: ${typeOne}, type2: ${typeTwo} -- real types: type1: ${this.typeOne}, type2: ${this.typeTwo}`)
       if (typeOne == typeTwo) {
         document.dispatchEvent(new CustomEvent('sameTypes', {
           detail: {

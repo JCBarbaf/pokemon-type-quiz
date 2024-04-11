@@ -21,7 +21,6 @@ class CheckButton extends HTMLElement {
         const button = this.shadow.querySelector('.check-button')
         button.classList.add('stopped')
         button.disabled = true
-        console.log(button)
       })
       document.addEventListener('win', (event) => {
         const button = this.shadow.querySelector('.check-button')
