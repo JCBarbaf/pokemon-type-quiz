@@ -4,7 +4,7 @@ class Scores extends HTMLElement {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
       this.score = 0
-      if (isNaN(localStorage.getItem("bestScore"))) {
+      if (!isNaN(localStorage.getItem("bestScore"))) {
         localStorage.setItem("bestScore", 0)
       }
       
