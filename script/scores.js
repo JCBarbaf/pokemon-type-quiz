@@ -4,10 +4,9 @@ class Scores extends HTMLElement {
       super()
       this.shadow = this.attachShadow({ mode: 'open' })
       this.score = 0
-      if (!isNaN(localStorage.getItem("bestScore"))) {
+      if (localStorage.getItem("bestScore") == null) {
         localStorage.setItem("bestScore", 0)
       }
-      
     }
   
     connectedCallback () {
